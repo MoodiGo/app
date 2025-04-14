@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -49,21 +50,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAywAtEaL9xEZmr3gOjOsCc8uSwWSlfcj8',
-    appId: '1:2167593300:android:9b4f7b4b9dd2ebfbf610c1',
-    messagingSenderId: '2167593300',
-    projectId: 'moodigo-app',
-    storageBucket: 'moodigo-app.firebasestorage.app',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env["FIREBASE_OPTIONS_ANDROID_API_KEY"]!,
+    appId: dotenv.env["FIREBASE_OPTIONS_ANDROID_APP_ID"]!,
+    messagingSenderId: dotenv.env["2167593300"]!,
+    projectId: dotenv.env["FIREBASE_PROJECT_ID"]!,
+    storageBucket: '${dotenv.env["FIREBASE_PROJECT_ID"]!}.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAK_DvQZNyxLK_QFL3cX7bAt7ibm6JuYRU',
-    appId: '1:2167593300:ios:2a13fc74883e28abf610c1',
-    messagingSenderId: '2167593300',
-    projectId: 'moodigo-app',
-    storageBucket: 'moodigo-app.firebasestorage.app',
-    iosClientId: '2167593300-9brjiv5fsnc6q3k9a4ssrt7vl6cn60o9.apps.googleusercontent.com',
-    iosBundleId: 'com.example.moodigoApp',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env["FIREBASE_OPTIONS_IOS_API_KEY"]!,
+    appId: dotenv.env["FIREBASE_OPTIONS_IOS_APP_ID"]!,
+    messagingSenderId: dotenv.env["2167593300"]!,
+    projectId: dotenv.env["FIREBASE_PROJECT_ID"]!,
+    storageBucket: '${dotenv.env["FIREBASE_PROJECT_ID"]!}.firebasestorage.app',
+    iosClientId: dotenv.env["FIREBASE_OPTIONS_IOS_CLIENT_ID"]!,
+    iosBundleId: dotenv.env["FIREBASE_OPTIONS_IOS_BUNDLE_ID"]!,
   );
 }
