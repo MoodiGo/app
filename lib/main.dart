@@ -1,11 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodigo_app/core/router/app_router.dart';
+import 'package:moodigo_app/config/firebase_options.dart';
+import 'package:moodigo_app/providers/auth_service_provider.dart';
 import 'package:moodigo_app/providers/auth_state_provider.dart';
-import 'i18n/generated/app_localizations.dart'; // ✅ Correct import
+import 'i18n/generated/app_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp( 
     const ProviderScope(child: MainApp())
   );
@@ -39,22 +46,27 @@ class MainApp extends ConsumerWidget {
 class TestHomePage extends ConsumerWidget {
   const TestHomePage({super.key});
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context);
-
+    final authState = ref.watch(authStateProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Moodigo'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              ref.read(authServiceProvider).signOut();
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
-          
           Text(localizations?.helloWorld ?? 'aaa World!'),
-          ElevatedButton(
-            onPressed: () {
-              // Toggle authentication state when the button is pressed
-              ref.read(authStateProvider.notifier).state = !ref.read(authStateProvider.notifier).state;
-            },
-            child: Text('Toggle Login Status'),
-          ),
+          Text(authState.valueOrNull?.uid ?? 'No user'),
         ],
       ),
     );
@@ -66,19 +78,15 @@ class TestSigninPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authService = ref.read(authServiceProvider);
+    
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
       body: Column(
         children: [
           Text("sign in page"),
-          ElevatedButton(
-            onPressed: () {
-              // Toggle authentication state when the button is pressed
-              ref.read(authStateProvider.notifier).state = !ref.read(authStateProvider.notifier).state;
-            },
-            child: Text('Toggle Login Status'),
-          ),
+          ElevatedButton(onPressed: () => authService.signInWithEmail("marinho.claramb@gmail.com", "Moodigo@123"), child: Text("Sign In")),
         ],
       ),
     );

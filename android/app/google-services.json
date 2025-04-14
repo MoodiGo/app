@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2167593300",
+    "project_id": "moodigo-app",
+    "storage_bucket": "moodigo-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2167593300:android:9b4f7b4b9dd2ebfbf610c1",
+        "android_client_info": {
+          "package_name": "com.example.moodigo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2167593300-88nv3pn130k7enqhbktpcmohcoj9979f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywAtEaL9xEZmr3gOjOsCc8uSwWSlfcj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2167593300-88nv3pn130k7enqhbktpcmohcoj9979f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

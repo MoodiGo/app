@@ -6,12 +6,15 @@ import 'package:moodigo_app/core/router/routes.dart';
 import 'package:moodigo_app/providers/auth_state_provider.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final isLoggedIn = ref.watch(authStateProvider.notifier).state;
-
+  final isLoggedIn = ref.watch(authStateProvider).valueOrNull != null;
+  
   return GoRouter(
   routes: appRoutes,
+
   debugLogDiagnostics: true,
+
   initialLocation: isLoggedIn ? RoutePaths.home : RoutePaths.signIn,
+
   redirect: (context, state) {
     final isGoingToSignInPage = state.matchedLocation == RoutePaths.signIn;
 
